@@ -70,12 +70,14 @@
                 <span>Output Token</span>
             </div>
             <div class="app-1_1b">
-                <input type="number" name="Output" id="to_amount">
+                <input readonly type="number" name="Output" id="to_amount">
                 <label for="Output" id="to_token_select"> <img src="" class="token_img" id="to_token_img" alt=""> <span
-                        id="from_token_text">Select <i class='bx bx-chevron-down'></i></span></label>
+                        id="to_token_text">Select <i class='bx bx-chevron-down'></i></span></label>
+                        <!-- <span id="">Select Token...</span> -->
             </div>
             <div class="app-1_btn">
-                <button id="swap_button">Swap Tokens</button>
+                <button id="swap_button">Swap Tokens with 0x</button>
+                <button id="swap_button__alt" style="margin-top: 15px;">Swap Tokens with 1Inch</button>
             </div>
 
         </div>
@@ -83,22 +85,20 @@
             <div class="app-2_2a">
                 <div class="app-2_2a_slippage">
                     <div>
-                        <span>Slippage - <span>0.1%</span></span>
+                        <span>Slippage - <span>Default: 0.1%</span></span>
                         <div style="display: flex; margin: 2px; padding: 2px;">
-                            <input id="slippage-slider" type="range" min="10" max="200" value="10"
-                                style="margin-right: 10px;">
-                            <input style="width: 40px;" maxlength="5"
-                                class="jsx-6335c29244b872f0 jsx-1478197342 slippage-input">
+                            <input id="slippageInput" style="width: 200px; color: black;" maxlength="5"
+                                class="jsx-6335c29244b872f0 jsx-1478197342 slippage-input" placeholder="Set Slippage">
                         </div>
                     </div>
                     <div>
-                        <span>Gas Price - <span>14</span>gwei</span>
+                        <span>Gas Price - <span>20</span>Gwei</span>
                         <div style="display: block; margin: 2px; padding: 2px;">
-                            <input type="radio" id="html" name="fav_language" value="HTML">
+                            <input type="radio" id="slow" name="gasLimit" value="slow">
                             <label for="html">Slow</label><br>
-                            <input type="radio" id="css" name="fav_language" value="CSS">
+                            <input type="radio" id="css" name="gasLimit" value="default">
                             <label for="css">Default</label><br>
-                            <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+                            <input type="radio" id="javascript" name="gasLimit" value="fast">
                             <label for="javascript">Fast</label>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="app-2_2b_routers_2">
                         <div class="app-2_2b_routers_2_img">
-                            <img src="IMG/0x.png" alt="1inch logo">
+                            <img src="IMG/0x.png" alt="0x logo">
                         </div>
                         <div>
                             <label class="switch">
@@ -139,24 +139,38 @@
 
             <div class="rq">
                 <div>0x</div>
-                <div>... ETH</div> <i class='bx bx-right-arrow-alt'></i>
-                <div>...</div>
+                <div>... ETH</div> 
+                <div>
+                    <img src="" class="token_img" id="from_token_img__alt" alt="">
+                    <i class='bx bx-right-arrow-alt'></i>
+                    <img src="" class="token_img" id="to_token_img__alt" alt="">
+                </div>
+                <div>
+                    <span id="0xQuotePrice">-</span>
+                </div>
                 <div></div>
             </div>
 
+            <div class="rq">
+                <div> 1Inch</div>
+                <div>... ETH</div>
+                    <div>
+                        <img src="" class="token_img" id="from_token_img__alt_2" alt="">
+                        <i class='bx bx-right-arrow-alt'></i>
+                        <img src="" class="token_img" id="to_token_img__alt_2" alt="">
+                    </div>
+                    <div>
+                        <span id="1inchQuotePrice">-</span>
+                    </div>
+                <div></div>
+            </div>
+<!-- 
             <div class="rq">
                 <div>0x</div>
                 <div>... ETH</div> <i class='bx bx-right-arrow-alt'></i>
                 <div>...</div>
                 <div></div>
-            </div>
-
-            <div class="rq">
-                <div>0x</div>
-                <div>... ETH</div> <i class='bx bx-right-arrow-alt'></i>
-                <div>...</div>
-                <div></div>
-            </div>
+            </div> -->
         </div>
     </section>
 

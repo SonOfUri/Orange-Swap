@@ -331,3 +331,12 @@ input:checked + .slider:before {
     grid-column: 1/1;
   }
 }/*# sourceMappingURL=style.css.map */
+
+.from_token_img__alt{
+  height: 50px;
+  width: auto;
+}
+.to_token_img__alt{
+  height: 50px;
+  width: auto;
+}

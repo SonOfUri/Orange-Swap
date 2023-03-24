@@ -7,6 +7,26 @@ let currentTrade = {};
 let currentSelectSide;
 let tokens;
 var foundtoken = [];
+var chosenLimit = 20000000000;
+
+const radioButtons = document.querySelectorAll('input[type="radio"]');
+
+radioButtons.forEach(function(radioButton) {
+  radioButton.addEventListener('click', function() {
+    if (radioButton.value === 'slow') {
+        chosenLimit = 15000000000;
+      console.log("Slow gas limit selected", chosenLimit);
+    } else if (radioButton.value === 'default') {
+        chosenLimit = 20000000000;
+      console.log("Default gas limit selected", chosenLimit);
+    } else if (radioButton.value === 'fast') {
+      // code to handle selection of fast gas limit
+      chosenLimit = 25000000000;
+      console.log("Fast gas limit selected", chosenLimit);
+    }
+  });
+});
+
 
 function isExists(tokenList, _token){
     for (const i in tokenList){
@@ -179,11 +199,15 @@ async function selectToken(token){
 function renderInterface(){
     if (currentTrade.from){
         console.log(currentTrade.from)
+        document.getElementById("from_token_img__alt").src = currentTrade.from.logoURI;
+        document.getElementById("from_token_img__alt_2").src = currentTrade.from.logoURI;
         document.getElementById("from_token_img").src = currentTrade.from.logoURI;
         document.getElementById("from_token_text").innerHTML = currentTrade.from.symbol;
     }
     if (currentTrade.to){
         console.log(currentTrade.to)
+        document.getElementById("to_token_img__alt").src = currentTrade.to.logoURI;
+        document.getElementById("to_token_img__alt_2").src = currentTrade.to.logoURI;
         document.getElementById("to_token_img").src = currentTrade.to.logoURI;
         document.getElementById("to_token_text").innerHTML = currentTrade.to.symbol;
     }
@@ -231,33 +255,75 @@ async function getPrice(){
     
     swapPriceJSON = await response.json();
     console.log("Price: ", swapPriceJSON);
-    
+
+    document.getElementById("0xQuotePrice").innerHTML = swapPriceJSON.buyAmount / (10 ** currentTrade.to.decimals);
     document.getElementById("to_amount").value = swapPriceJSON.buyAmount / (10 ** currentTrade.to.decimals);
     document.getElementById("gas_estimate").innerHTML = swapPriceJSON.estimatedGas;
 }
 
 async function getQuote(account){
     console.log("Getting Quote");
+    
   
     if (!currentTrade.from || !currentTrade.to || !document.getElementById("from_amount").value) return;
     let amount = Number(document.getElementById("from_amount").value * 10 ** currentTrade.from.decimals);
+    let slippageInput = document.getElementById("slippageInput").value;
+    if (!slippageInput){
+        slippageInput = (1/10);
+    }
   
     const params = {
         sellToken: currentTrade.from.address,
         buyToken: currentTrade.to.address,
         sellAmount: amount,
         takerAddress: account,
+        slippagePercentage: slippageInput,
+
     }
+    console.log(params);
   
     // Fetch the swap quote.
     const response = await fetch(`https://api.0x.org/swap/v1/quote?${qs.stringify(params)}`);
     
     swapQuoteJSON = await response.json();
-    
+
+    document.getElementById("0xQuotePrice").value = swapQuoteJSON.buyAmount / (10 ** currentTrade.to.decimals);
     document.getElementById("to_amount").value = swapQuoteJSON.buyAmount / (10 ** currentTrade.to.decimals);
     document.getElementById("gas_estimate").innerHTML = swapQuoteJSON.estimatedGas;
   
     return swapQuoteJSON;
+}
+
+async function get1inchQuote(){
+    getPrice();
+    console.log("Getting 1Inch Quote");
+    if (!currentTrade.from || !currentTrade.to || !document.getElementById("from_amount").value) return;
+    let amount = Number(document.getElementById("from_amount").value * 10 ** currentTrade.from.decimals);
+
+    const swapParams = {
+        fromTokenAddress: currentTrade.from.address,
+        toTokenAddress: currentTrade.to.address,
+        amount: amount,
+        // gasLimit: chosenLimit,
+        // fromAddress: account,
+        // address of sender
+        // takerAddress: account,
+    }
+
+        // Fetch the swap quote.
+    const response = await fetch(`https://api.1inch.io/v5.0/1/quote?${qs.stringify(swapParams)}`);
+    
+
+    const swapQuoteJSON = await response.json();
+    console.log("1Inch", swapQuoteJSON.toTokenAmount);
+
+    document.getElementById("1inchQuotePrice").innerHTML = swapQuoteJSON.toTokenAmount / (10 ** currentTrade.to.decimals);
+    // document.getElementById("to_amount").value = swapQuoteJSON.buyAmount / (10 ** currentTrade.to.decimals);
+    // document.getElementById("gas_estimate").innerHTML = swapQuoteJSON.estimatedGas;
+  
+    // return swapQuoteJSON;
+    
+
 }
 async function trySwap(){
     const erc20abi= [{ "inputs": [ { "internalType": "string", "name": "name", "type": "string" }, { "internalType": "string", "name": "symbol", "type": "string" }, { "internalType": "uint256", "name": "max_supply", "type": "uint256" } ], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "spender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "Transfer", "type": "event" }, { "inputs": [ { "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "spender", "type": "address" } ], "name": "allowance", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "approve", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "account", "type": "address" } ], "name": "balanceOf", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "burn", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "account", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "burnFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "decimals", "outputs": [ { "internalType": "uint8", "name": "", "type": "uint8" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "subtractedValue", "type": "uint256" } ], "name": "decreaseAllowance", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "addedValue", "type": "uint256" } ], "name": "increaseAllowance", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "totalSupply", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "transfer", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "transferFrom", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "stateMutability": "nonpayable", "type": "function" }]
@@ -295,6 +361,49 @@ async function trySwap(){
     // Perform the swap
     const receipt = await web3.eth.sendTransaction(swapQuoteJSON);
     console.log("receipt: ", receipt);
+}
+
+async function try1InchSwap(){
+        // Only work if MetaMask is connect
+    // Connecting to Ethereum: Metamask
+    const web3 = new Web3(Web3.givenProvider);
+    console.log("Getting 1Inch Quote");
+
+    if (!currentTrade.from || !currentTrade.to || !document.getElementById("from_amount").value) return;
+    let amount = Number(document.getElementById("from_amount").value * 10 ** currentTrade.from.decimals);
+    let slippageInput = document.getElementById("slippageInput").value;
+    if (!slippageInput){
+        slippageInput = (1/10);
+    }
+    let accounts = await ethereum.request({ method: "eth_accounts" });
+    let takerAddress = accounts[0];
+
+    const swapParams = {
+        fromTokenAddress: currentTrade.from.address,
+        toTokenAddress: currentTrade.to.address,
+        amount: amount,
+        fromAddress: takerAddress,
+        slippage: slippageInput,
+        gasPrice: chosenLimit,
+        // address of sender
+        // takerAddress: account,
+    }
+
+    const tx = await fetch(`https://api.1inch.io/v5.0/1/approve/spender`)
+        // Fetch the swap quote.
+    const response = await fetch(`https://api.1inch.io/v5.0/1/swap?${qs.stringify(swapParams)}`);
+    
+
+    const swapQuoteJSON = await response.json();
+    console.log("1Inch", swapQuoteJSON.toTokenAmount);
+
+    document.getElementById("1inchQuotePrice").innerHTML = swapQuoteJSON.toTokenAmount / (10 ** currentTrade.to.decimals);
+    // document.getElementById("to_amount").value = swapQuoteJSON.buyAmount / (10 ** currentTrade.to.decimals);
+    // document.getElementById("gas_estimate").innerHTML = swapQuoteJSON.estimatedGas;
+  
+    // return swapQuoteJSON;
+    
+
 }
 function hexToDecimal(hex) {
     // Remove the 0x prefix if it exists
@@ -344,8 +453,10 @@ document.getElementById("to_token_select").onclick = () => {
     openModal("to");
 };
 document.getElementById("modal_close").onclick = closeModal;
-document.getElementById("from_amount").onblur = getPrice;
+// document.getElementById("from_amount").onblur = getPrice;
+document.getElementById("from_amount").onblur = get1inchQuote;
 document.getElementById("swap_button").onclick = trySwap;
+document.getElementById("swap_button__alt").onclick = try1InchSwap;
 document.getElementById("search_btn").onclick = searchTokens;
 },{"alchemy-sdk":129,"bignumber.js":161,"qs":211,"web3":219}],2:[function(require,module,exports){
 "use strict";
