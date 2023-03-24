@@ -1,0 +1,414 @@
+html {
+    font-size: 62.7%;
+}
+
+@media screen and (max-width: 878px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media screen and (max-width: 774px) {
+    html {
+        font-size: 50%;
+    }
+}
+
+@media screen and (max-width: 633px) {
+    html {
+        font-size: 40%;
+    }
+}
+
+@media screen and (max-width: 424px) {
+    html {
+        font-size: 20%;
+    }
+}
+
+* {
+    font-family: "Gilroy";
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+
+body {
+    background: -webkit-linear-gradient(
+            left bottom,
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%)
+        ),
+        url(IMG/jaw.png);
+    background: -moz-linear-gradient(
+            left bottom,
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%)
+        ),
+        url(IMG/jaw.png);
+    background: -o-linear-gradient(
+            left bottom,
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%)
+        ),
+        url(IMG/jaw.png);
+    background: linear-gradient(
+            to right top,
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%),
+            rgb(165 56 4/95%)
+        ),
+        url(IMG/jaw.png);
+    background-repeat: no-repeat;
+    -webkit-background-size: hover;
+    -moz-background-size: hover;
+    -o-background-size: hover;
+    background-size: hover;
+    background-position: center;
+    margin: 0;
+    height: 100%;
+    width: 100vw;
+}
+
+label {
+    cursor: pointer;
+}
+
+$light: #fff;
+$dark: #000;
+$primary: #ff7400;
+
+input{
+    color: $light;
+}
+
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+    font-size: 2rem;
+
+    & * {
+        margin: auto 1rem;
+    }
+
+    &-img {
+        width: 10rem;
+
+        & img {
+            width: 100%;
+        }
+    }
+
+    &-links {
+        display: flex;
+        color: $light;
+        gap: 2rem;
+        font-size: 3rem;
+    }
+
+    &-btn {
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        font-size: 2.5rem;
+
+        & i {
+            margin-right: 1rem;
+        }
+
+        &_1 {
+            margin-right: 1.5rem;
+            border: 0.2rem solid $primary;
+            color: $light;
+            background: none;
+
+            & i {
+                color: $dark;
+            }
+        }
+        &_2 {
+            background-color: $primary;
+            color: $dark;
+            border: 0.2rem solid $dark;
+        }
+    }
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: $light;
+    margin: 2rem 6rem !important;
+    font-size: 2rem;
+
+    & div {
+        padding: 2rem;
+    }
+
+    &-1 {
+        border-right: 0.1rem solid $light;
+
+        &_1a,
+        &_1b {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem !important;
+        }
+        &_1b {
+            & input {
+                width: 45%;
+                height: 3rem;
+                background-color: $dark;
+                border: 0.1rem solid $primary;
+                border-radius: 0.5rem;
+            }
+        }
+        &_swap {
+            font-size: 4rem;
+            text-align: end;
+            color: $primary;
+            margin: 0.2rem;
+            padding: 0.2rem !important;
+        }
+
+        &_btn {
+            & button {
+                width: 100%;
+                padding: 2rem;
+                border: 0.1rem solid $dark;
+                background: $primary;
+                border-radius: 1rem;
+                color: $light;
+                font-size: 2rem;
+
+                &:hover {
+                    border: $primary;
+                }
+            }
+        }
+    }
+
+    &-2{
+        margin: 0px !important;
+        padding: 0px !important;
+        &_2a{
+            
+        margin: 0px;
+        padding: 0px !important;
+            &_slippage{
+                display: flex;
+                justify-content: space-around;
+                
+        margin: 0px;
+        padding: 0px !important;
+            }
+        }
+        &_2b{
+            
+        margin: 0px !important;
+        padding: 0px !important;
+            & p{
+                display: block;
+            }
+            &_routers{
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                // margin: 2rem auto;
+                 padding: 0.1rem !important;
+                    margin: 0.1rem;
+
+                &_1, &_2{
+                    display: flex;
+                   
+                    &_img{
+                        width: 10rem;
+                    }
+                    // display: inline-block;
+                    text-align: center;
+
+                    & img{
+                        width: 100%;
+                        margin-bottom: 2rem;
+                    }
+                }
+            }
+        }
+    }
+
+    &-3 {
+        grid-column: 1/3;
+        border-top: 0.1rem solid $light;
+    }
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &-header {
+        display: flex;
+        flex-direction: column;
+        color: $light;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    &-body {
+        height: fit-content;
+        overflow: scroll;
+    }
+
+    &-content {
+        background-color: $primary;
+        padding: 20px 10px;
+        border-radius: 15px;
+    }
+}
+
+.search {
+    &_token {
+        padding: 0 20px;
+        height: 38px;
+        margin-top: 5px;
+        border: 0.8px solid gray;
+        background-color: #0d111c;
+        color: $light;
+        width: 75%;
+        font-size: 0.8rem;
+    }
+    &_btn {
+        margin-top: 5px;
+        background-color: $primary;
+        color: $light;
+        border: none;
+        border-radius: 10px;
+        height: 38px;
+        width: 100px;
+        font: 1rem;
+    }
+}
+
+.token_list_text {
+    color: $light;
+}
+.disclosure {
+    padding: 5px;
+    margin-left: 20px;
+    font-size: 0.9rem;
+    color: $primary;
+}
+
+.side {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.token_row {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+#modal_close {
+    font-size: 5rem;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 2rem;
+    width: 2rem;
+    left: 2.75px;
+    bottom: 2.75px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: $primary;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px $primary;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 0.2rem;
+    height: 2.5rem;
+    width: 5rem;
+  }
+  
+  .slider.round:before {
+    border-radius: 0.4rem;
+  }
+
+.rq{
+    margin: 0px !important;
+    padding: 0px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    text-align: center;
+    margin: 10px auto;
+}
+
+@media screen and (max-width: 878px) {
+    .app{
+        display: grid;
+    grid-template-columns: 1fr;
+    margin: 2rem 30rem !important;
+    }
+
+    .app-3{
+        grid-column: 1/1;
+    }
+}

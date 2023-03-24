@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange Swap</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/android-chrome-512x512.png">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://kit.fontawesome.com/2459c0902c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <section class="nav">
+        <div class="nav-img">
+            <img src="IMG/jaw.png" alt="Logo Here">
+        </div>
+
+        <div class="nav-links">
+            <p>Home</p>
+            <p>Swap</p>
+        </div>
+
+        <div>
+            <button class="nav-btn nav-btn_1">
+                <i class="fa-brands fa-ethereum"></i> Ethereum
+            </button>
+            <button class="nav-btn nav-btn_2" id="login_button">
+                <i class="fa-solid fa-wallet"></i> Connect Wallet
+            </button>
+        </div>
+    </section>
+
+    <section class="app">
+        <div class="app-1">
+            <div class="app-1_1a">
+                <span>Bal <span id="tokenBal">0.00</span> </span>
+                <span>Input Token</span>
+            </div>
+            <div class="app-1_1b">
+                <input type="number" name="Input" id="from_amount">
+                <label for="Input" id="from_token_select"> <img src="" class="token_img" id="from_token_img" alt="">
+                    <span id="from_token_text">Select <i class='bx bx-chevron-down'></i></span></label>
+            </div>
+            <div class="app-1_swap">
+                <i class='bx bxs-down-arrow-circle'></i>
+            </div>
+            <div class="app-1_1a">
+                <span>&nbsp; </span>
+                <span>Output Token</span>
+            </div>
+            <div class="app-1_1b">
+                <input type="number" name="Output" id="to_amount">
+                <label for="Output" id="to_token_select"> <img src="" class="token_img" id="to_token_img" alt=""> <span
+                        id="from_token_text">Select <i class='bx bx-chevron-down'></i></span></label>
+            </div>
+            <div class="app-1_btn">
+                <button id="swap_button">Swap Tokens</button>
+            </div>
+
+        </div>
+        <div class="app-2">
+            <div class="app-2_2a">
+                <div class="app-2_2a_slippage">
+                    <div>
+                        <span>Slippage - <span>0.1%</span></span>
+                        <div style="display: flex; margin: 2px; padding: 2px;">
+                            <input id="slippage-slider" type="range" min="10" max="200" value="10"
+                                style="margin-right: 10px;">
+                            <input style="width: 40px;" maxlength="5"
+                                class="jsx-6335c29244b872f0 jsx-1478197342 slippage-input">
+                        </div>
+                    </div>
+                    <div>
+                        <span>Gas Price - <span>14</span>gwei</span>
+                        <div style="display: block; margin: 2px; padding: 2px;">
+                            <input type="radio" id="html" name="fav_language" value="HTML">
+                            <label for="html">Slow</label><br>
+                            <input type="radio" id="css" name="fav_language" value="CSS">
+                            <label for="css">Default</label><br>
+                            <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+                            <label for="javascript">Fast</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-2_2b">
+                <p>Swap Routers</p>
+                <div class="app-2_2b_routers">
+                    <div class="app-2_2b_routers_1">
+                        <div class="app-2_2b_routers_1_img">
+                            <img src="IMG/1inch.png" alt="1inch logo">
+                        </div>
+                        <div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="app-2_2b_routers_2">
+                        <div class="app-2_2b_routers_2_img">
+                            <img src="IMG/0x.png" alt="1inch logo">
+                        </div>
+                        <div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="app-3" style="width: 100%;">
+            <p>
+                Router Quotes
+            </p>
+
+            <div class="rq">
+                <div>0x</div>
+                <div>... ETH</div> <i class='bx bx-right-arrow-alt'></i>
+                <div>...</div>
+                <div></div>
+            </div>
+
+            <div class="rq">
+                <div>0x</div>
+                <div>... ETH</div> <i class='bx bx-right-arrow-alt'></i>
+                <div>...</div>
+                <div></div>
+            </div>
+
+            <div class="rq">
+                <div>0x</div>
+                <div>... ETH</div> <i class='bx bx-right-arrow-alt'></i>
+                <div>...</div>
+                <div></div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="modal" id="token_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title">Search a Token</h5>
+                    <div class="side">
+                        <input class="search_token" type="text" name="" id="search_token"
+                            placeholder="Search symbol of the Token or paste contract address">
+                        <button class="search_btn" id="search_btn">Search</button>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <div id="token_list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+    <script src="bundle.js"></script>
+</body>
+
+</html>
