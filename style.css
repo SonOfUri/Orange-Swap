@@ -1,5 +1,5 @@
 html {
-  font-size: 62.7%;
+  font-size: 55%;
 }
 
 @media screen and (max-width: 878px) {
@@ -96,7 +96,7 @@ input {
   display: grid;
   grid-template-columns: 1fr 1fr;
   color: #fff;
-  margin: 2rem 6rem !important;
+  margin: 0rem 6rem !important;
   font-size: 2rem;
 }
 .app div {
@@ -112,7 +112,7 @@ input {
 }
 .app-1_1b input {
   width: 45%;
-  height: 3rem;
+  height: 4.5rem;
   background-color: #000;
   border: 0.1rem solid #ff7400;
   border-radius: 0.5rem;
@@ -152,15 +152,14 @@ input {
 }
 .app-2_2b {
   margin: 0px !important;
-  padding: 0px !important;
+  padding: 2rem !important;
 }
 .app-2_2b p {
   display: block;
 }
 .app-2_2b_routers {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: space-between;
   padding: 0.1rem !important;
   margin: 0.1rem;
 }
@@ -285,7 +284,7 @@ input {
   width: 2rem;
   left: 2.75px;
   bottom: 2.75px;
-  background-color: white;
+  background-color: #000;
   transition: 0.4s;
 }
 
@@ -330,13 +329,9 @@ input:checked + .slider:before {
   .app-3 {
     grid-column: 1/1;
   }
+}
+#slippageInput {
+  background: #000;
+  color: #fff;
+  border: 1px solid #ff7400;
 }/*# sourceMappingURL=style.css.map */
-
-.from_token_img__alt{
-  height: 50px;
-  width: auto;
-}
-.to_token_img__alt{
-  height: 50px;
-  width: auto;
-}
