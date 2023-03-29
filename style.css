@@ -1,5 +1,5 @@
 html {
-  font-size: 55%;
+  font-size: 62.7%;
 }
 
 @media screen and (max-width: 878px) {
@@ -9,12 +9,12 @@ html {
 }
 @media screen and (max-width: 774px) {
   html {
-    font-size: 50%;
+    font-size: 40%;
   }
 }
 @media screen and (max-width: 633px) {
   html {
-    font-size: 40%;
+    font-size: 35%;
   }
 }
 @media screen and (max-width: 424px) {
@@ -23,7 +23,7 @@ html {
   }
 }
 * {
-  font-family: "Gilroy";
+  font-family: sans-serif;
 }
 
 *::-webkit-scrollbar {
@@ -31,12 +31,12 @@ html {
 }
 
 body {
-  background: linear-gradient(to right top, rgba(165, 56, 4, 0.95), rgba(165, 56, 4, 0.95), rgba(165, 56, 4, 0.95), rgba(165, 56, 4, 0.95)), url(IMG/jaw.png);
+  background: linear-gradient(to right top, rgba(71, 64, 60, 0.95), rgba(165, 56, 4, 0.95), rgba(97, 90, 87, 0.95), rgba(48, 47, 46, 0.95)), url(IMG/jaw2.png);
   background-repeat: no-repeat;
   background-size: hover;
   background-position: center;
   margin: 0;
-  height: 100%;
+  height: 100vh;
   width: 100vw;
 }
 
@@ -96,7 +96,7 @@ input {
   display: grid;
   grid-template-columns: 1fr 1fr;
   color: #fff;
-  margin: 0rem 6rem !important;
+  margin: auto 13rem !important;
   font-size: 2rem;
 }
 .app div {
@@ -111,11 +111,14 @@ input {
   padding: 0.5rem !important;
 }
 .app-1_1b input {
-  width: 45%;
+  width: 65%;
   height: 4.5rem;
   background-color: #000;
   border: 0.1rem solid #ff7400;
   border-radius: 0.5rem;
+}
+.app-1_1b label {
+  font-size: 3rem;
 }
 .app-1_swap {
   font-size: 4rem;
@@ -146,7 +149,7 @@ input {
 }
 .app-2_2a_slippage {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 0px;
   padding: 0px !important;
 }
@@ -324,7 +327,6 @@ input:checked + .slider:before {
   .app {
     display: grid;
     grid-template-columns: 1fr;
-    margin: 2rem 30rem !important;
   }
   .app-3 {
     grid-column: 1/1;

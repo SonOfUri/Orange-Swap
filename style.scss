@@ -1,5 +1,5 @@
 html {
-    font-size: 55%;
+    font-size: 62.7%;
 }
 
 @media screen and (max-width: 878px) {
@@ -10,13 +10,13 @@ html {
 
 @media screen and (max-width: 774px) {
     html {
-        font-size: 50%;
+        font-size: 40%;
     }
 }
 
 @media screen and (max-width: 633px) {
     html {
-        font-size: 40%;
+        font-size: 35%;
     }
 }
 
@@ -34,40 +34,36 @@ html {
     display: none;
 }
 
+$var1:  left bottom,
+rgba(71, 64, 60, 0.95),
+rgb(165 56 4/95%),
+rgba(97, 90, 87, 0.95),
+rgba(48, 47, 46, 0.95);
+
+$var2:  to right top,
+rgba(71, 64, 60, 0.95),
+rgb(165 56 4/95%),
+rgba(97, 90, 87, 0.95),
+rgba(48, 47, 46, 0.95);
+
 
 body {
     background: -webkit-linear-gradient(
-            left bottom,
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%)
+           $var1
         ),
-        url(IMG/jaw.png);
+        url(IMG/jaw2.png);
     background: -moz-linear-gradient(
-            left bottom,
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%)
+           $var1
         ),
-        url(IMG/jaw.png);
+        url(IMG/jaw2.png);
     background: -o-linear-gradient(
-            left bottom,
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%)
+           $var1
         ),
-        url(IMG/jaw.png);
+        url(IMG/jaw2.png);
     background: linear-gradient(
-            to right top,
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%),
-            rgb(165 56 4/95%)
+           $var2
         ),
-        url(IMG/jaw.png);
+        url(IMG/jaw2.png);
     background-repeat: no-repeat;
     -webkit-background-size: hover;
     -moz-background-size: hover;
@@ -75,7 +71,7 @@ body {
     background-size: hover;
     background-position: center;
     margin: 0;
-    height: 100%;
+    height: 100vh;
     width: 100vw;
 }
 
@@ -148,7 +144,7 @@ input{
     display: grid;
     grid-template-columns: 1fr 1fr;
     color: $light;
-    margin: 0rem 6rem !important;
+    margin: auto 13rem !important;
     font-size: 2rem;
 
     & div {
@@ -166,11 +162,15 @@ input{
         }
         &_1b {
             & input {
-                width: 45%;
+                width: 65%;
                 height: 4.5rem;
                 background-color: $dark;
                 border: 0.1rem solid $primary;
                 border-radius: 0.5rem;
+            }
+
+            & label{
+                font-size: 3rem;
             }
         }
         &_swap {
@@ -207,7 +207,7 @@ input{
         padding: 0px !important;
             &_slippage{
                 display: flex;
-                justify-content: space-around;
+                justify-content: space-between;
                 
         margin: 0px;
         padding: 0px !important;
@@ -405,7 +405,7 @@ input{
     .app{
         display: grid;
     grid-template-columns: 1fr;
-    margin: 2rem 30rem !important;
+    // margin: 2rem 30rem !important;
     }
 
     .app-3{
