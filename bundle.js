@@ -396,8 +396,11 @@ async function try1InchSwap(){
     
 
     const swapQuoteJSON = await response.json();
-    alert(swapQuoteJSON.description);
-    console.log("1Inch", swapQuoteJSON);
+    if (swapQuoteJSON.statusCode == 400){
+        // alert(swapQuoteJSON.description);
+        alert("Insufficient balance. Check token balance.");
+    }
+    console.log("1Inch", swapQuoteJSON.statusCode);
 
     document.getElementById("1inchQuotePrice").innerHTML = swapQuoteJSON.toTokenAmount / (10 ** currentTrade.to.decimals);
     // document.getElementById("to_amount").value = swapQuoteJSON.buyAmount / (10 ** currentTrade.to.decimals);
