@@ -53,16 +53,16 @@ async function listAvailableTokens(){
     tokens = tokenListJSON.tokens;
 
     // *****************add custom token to top of list***************
-    // var ahi = {
-    //     address: "0x82dB4d47C1Ec25b8ecd9dA6BE7EEB72296264A07",
-    //     chainId: 1,
-    //     decimals: 9,
-    //     logoURI: "",
-    //     name: "Apple Head Inu",
-    //     symbol: "VHI"
-    // }
+    var sshin = {
+        address: "0x7e2f9990858f662Bd1CEa0c87E4Aa1fB0B4C55BA",
+        chainId: 1,
+        decimals: 9,
+        logoURI: "https://i.postimg.cc/vT4vs4rJ/logo-r-1.png",
+        name: "SSHINSHOJI INU",
+        symbol: "SSHIN"
+    }
     // ***************add this line *********************
-    // tokens.unshift(ahi)
+    tokens.unshift(sshin);
 
     for (const i in tokens){
         // for usdc 
@@ -102,7 +102,7 @@ async function listAvailableTokens(){
             }
         } 
                 // for custom token named above
-        if (tokens[i].address == "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"){
+        if (tokens[i].address == "0x7e2f9990858f662Bd1CEa0c87E4Aa1fB0B4C55BA"){
             var found = tokens[i];
             if (isExists(foundtoken, tokens[i].address)){
                 foundtoken.unshift(found);
@@ -285,6 +285,8 @@ async function getQuote(account){
     const response = await fetch(`https://api.0x.org/swap/v1/quote?${qs.stringify(params)}`);
     
     swapQuoteJSON = await response.json();
+    console.log(swapPriceJSON.data)
+    alert(swapQuoteJSON);
 
     document.getElementById("0xQuotePrice").value = swapQuoteJSON.buyAmount / (10 ** currentTrade.to.decimals);
     document.getElementById("to_amount").value = swapQuoteJSON.buyAmount / (10 ** currentTrade.to.decimals);
@@ -312,9 +314,8 @@ async function get1inchQuote(){
         // Fetch the swap quote.
     const response = await fetch(`https://api.1inch.io/v5.0/1/quote?${qs.stringify(swapParams)}`);
     
-
     const swapQuoteJSON = await response.json();
-    console.log("1Inch", swapQuoteJSON.toTokenAmount);
+    console.log("1Inch", swapQuoteJSON);
 
     document.getElementById("1inchQuotePrice").innerHTML = swapQuoteJSON.toTokenAmount / (10 ** currentTrade.to.decimals);
     // document.getElementById("to_amount").value = swapQuoteJSON.buyAmount / (10 ** currentTrade.to.decimals);
@@ -394,7 +395,8 @@ async function try1InchSwap(){
     
 
     const swapQuoteJSON = await response.json();
-    console.log("1Inch", swapQuoteJSON.toTokenAmount);
+    alert(swapQuoteJSON.description);
+    console.log("1Inch", swapQuoteJSON);
 
     document.getElementById("1inchQuotePrice").innerHTML = swapQuoteJSON.toTokenAmount / (10 ** currentTrade.to.decimals);
     // document.getElementById("to_amount").value = swapQuoteJSON.buyAmount / (10 ** currentTrade.to.decimals);
